@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Birthday Surprise!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        overflow: hidden; /* Prevents scrollbars from the confetti/balloons */
+      }
+      .font-pacifico {
+        font-family: "Pacifico", cursive;
+      }
+      .balloon {
+        position: absolute;
+        bottom: -200px;
+        width: 100px;
+        height: 120px;
+        background-color: rgba(255, 99, 71, 0.8);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        animation: floatUp 10s linear forwards; /* Changed to forwards to prevent snapping */
+        z-index: 10;
+      }
+      .balloon::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 50px;
+        background-color: #fff;
+      }
+      @keyframes floatUp {
+        0% {
+          bottom: -200px;
+          transform: translateX(0);
+        }
+        100% {
+          bottom: 110vh;
+          transform: translateX(50px) scale(1.1);
+        }
+      }
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #f00;
+        top: -20px;
+        animation: fallDown 4s linear forwards; /* Changed to forwards */
+        z-index: 10;
+      }
+      @keyframes fallDown {
+        0% {
+          top: -20px;
+          opacity: 1;
+          transform: rotate(0deg);
+        }
+        100% {
+          top: 110vh;
+          opacity: 0;
+          transform: rotate(720deg);
+        }
+      }
+      .candle {
+        position: absolute;
+        width: 10px;
+        height: 50px;
+        background: #fff;
+        border-radius: 5px 5px 0 0;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .candle:before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 15px;
+        background: #333;
+      }
+      .flame {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 15px;
+        height: 25px;
+        background: orange;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        box-shadow: 0 0 10px orange, 0 0 20px orange, 0 0 30px orange;
+        animation: flicker 1s infinite;
+      }
+      @keyframes flicker {
+        0%,
+        100% {
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          transform: translateX(-50%) scale(1.1);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-t from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center text-white p-4">
+    <!-- Initial Button Screen -->
+    <div id="initial-screen" class="text-center">
+      <button
+        id="startBtn"
+        class="bg-white text-pink-500 font-bold text-2xl py-6 px-12 rounded-full shadow-2xl transform transition-transform duration-300 hover:scale-110 animate-pulse">
+        Click Me, Nurma!
+      </button>
+    </div>
+
+    <!-- Main Content Container (Initially Hidden) -->
+    <div
+      id="main-content"
+      class="hidden text-center bg-black bg-opacity-30 p-8 md:p-12 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/20 max-w-2xl w-full transition-all duration-1000 opacity-0 -translate-y-10">
+      <h1
+        class="font-pacifico text-5xl md:text-7xl mb-4 text-yellow-300 drop-shadow-[0_5px_5px_rgba(0,0,0,0.4)]">
+        Happy Birthday, Nurma!
+      </h1>
+      <p class="text-lg md:text-2xl mb-8 text-gray-200">
+        Wishing you a day filled with love, laughter, and all the things that
+        make you happy. May your year ahead be as amazing as you are!
+      </p>
+
+      <!-- Cake Area -->
+      <div class="relative inline-block mt-8">
+        <div class="w-64 h-32 bg-yellow-200 rounded-t-lg relative">
+          <!-- Icing -->
+          <div
+            class="absolute top-0 left-0 w-full h-8 bg-pink-400 rounded-t-lg"></div>
+          <div
+            class="absolute top-4 left-0 w-full h-4 bg-white opacity-80"></div>
+          <!-- Candle -->
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+        </div>
+        <div class="w-72 h-8 bg-gray-300 rounded-b-lg shadow-inner"></div>
+      </div>
+
+      <div class="mt-12">
+        <button
+          id="surpriseBtn"
+          class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110">
+          Another Surprise!
+        </button>
+      </div>
+    </div>
+    <audio id="birthdaySong" src="song1.mp3"></audio>
+    <script>
+      // --- Element References ---
+      const initialScreen = document.getElementById("initial-screen");
+      const startBtn = document.getElementById("startBtn");
+      const mainContent = document.getElementById("main-content");
+      const surpriseBtn = document.getElementById("surpriseBtn");
+
+      // --- Event Listener for the initial button ---
+      startBtn.addEventListener("click", async () => {
+        // Browsers require a user interaction to start audio.
+        await Tone.start();
+
+        // Play the birthday song
+        playBirthdaySong();
+
+        // Hide the initial button
+        initialScreen.style.display = "none";
+
+        // Show the main content
+        mainContent.classList.remove("hidden");
+
+        // Trigger the fade-in and move-up animation
+        setTimeout(() => {
+          mainContent.classList.remove("opacity-0", "-translate-y-10");
+        }, 100); // A small delay ensures the transition works correctly
+
+        // Start background animations
+        setInterval(createBalloon, 2000);
+        setInterval(createConfetti, 300);
+      });
+
+      // --- Function to play the song ---
+      function playBirthdaySong() {
+        // Create a synth (a simple instrument) and connect it to the speakers
+        const synth = new Tone.Synth().toDestination();
+
+        // Define the melody as an array of [note, duration] pairs
+        const melody = [
+          ["C4", "8n"],
+          ["C4", "8n"],
+          ["D4", "4n"],
+          ["C4", "4n"],
+          ["F4", "4n"],
+          ["E4", "2n"],
+          ["C4", "8n"],
+          ["C4", "8n"],
+          ["D4", "4n"],
+          ["C4", "4n"],
+          ["G4", "4n"],
+          ["F4", "2n"],
+          ["C4", "8n"],
+          ["C4", "8n"],
+          ["C5", "4n"],
+          ["A4", "4n"],
+          ["F4", "4n"],
+          ["E4", "4n"],
+          ["D4", "2n"],
+          ["Bb4", "8n"],
+          ["Bb4", "8n"],
+          ["A4", "4n"],
+          ["F4", "4n"],
+          ["G4", "4n"],
+          ["F4", "2n"],
+        ];
+
+        // Create a sequence with the melody that can be scheduled
+        const part = new Tone.Part((time, note) => {
+          // The notes have been scheduled to play at the correct time
+          synth.triggerAttackRelease(note[0], note[1], time);
+        }, melody).start(0);
+
+        // Set the tempo (beats per minute)
+        Tone.Transport.bpm.value = 100;
+
+        // Start the transport (the timeline) which will play the scheduled notes
+        Tone.Transport.start();
+      }
+
+      // --- Animation Functions ---
+
+      // Function to generate a random color
+      function getRandomColor() {
+        const colors = [
+          "#ff6347",
+          "#ffd700",
+          "#98fb98",
+          "#87cefa",
+          "#dda0dd",
+          "#ff1493",
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      // Function to create a balloon
+      function createBalloon() {
+        const balloon = document.createElement("div");
+        balloon.className = "balloon";
+        balloon.style.left = `${Math.random() * 90}vw`;
+        balloon.style.backgroundColor = getRandomColor();
+        balloon.style.animationDuration = `${Math.random() * 5 + 8}s`; // Vary speed
+        document.body.appendChild(balloon);
+
+        // Remove balloon after animation to clean up the DOM
+        setTimeout(() => {
+          balloon.remove();
+        }, 13000);
+      }
+
+      // Function to create a confetti piece
+      function createConfetti() {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confetti.style.animationDuration = `${Math.random() * 3 + 3}s`; // Vary speed
+        document.body.appendChild(confetti);
+
+        // Remove confetti after animation
+        setTimeout(() => {
+          confetti.remove();
+        }, 6000);
+      }
+
+      // Surprise button functionality
+      surpriseBtn.addEventListener("click", () => {
+        // Create a burst of confetti
+        for (let i = 0; i < 100; i++) {
+          setTimeout(createConfetti, i * 10);
+        }
+      });
+      const audio = document.getElementById("birthdaySong");
+
+      startBtn.addEventListener("click", async () => {
+        // Play the audio (requires user click so this works in all browsers)
+        audio.play();
+
+        // Hide the initial button
+        initialScreen.style.display = "none";
+
+        // Show the main content
+        mainContent.classList.remove("hidden");
+
+        // Trigger animation
+        setTimeout(() => {
+          mainContent.classList.remove("opacity-0", "-translate-y-10");
+        }, 100);
+
+        // Start background animations
+        setInterval(createBalloon, 2000);
+        setInterval(createConfetti, 300);
+      });
+    </script>
+  </body>
+</html>

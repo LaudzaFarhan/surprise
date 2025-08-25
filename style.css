@@ -1,0 +1,439 @@
+/*Style Blockly Blocks*/
+.blocklyText,
+.blocklyHtmlInput,
+.blocklyTreeLabel {
+  font-family: "Kanit", sans-serif !important;
+}
+
+/*Blockly background*/
+.blocklyMainBackground {
+  background-color: #dfe1ed;
+  background-image: url(../../../assets/img/tl_circuit.svg);
+}
+
+.uk-button {
+  padding: 0 14px !important;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border-top: none;
+  background-color: #fff;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+pre {
+  margin-top: 0px;
+  white-space: pre-wrap !important;
+  word-break: break-word;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 999;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Black w/ opacity */
+}
+
+/*Show save snippet modal */
+.snippet_modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  /* Could be more or less, depending on screen size */
+  text-align: center;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+/* Show marking modal*/
+.marking_modal-content {
+  background-color: #fefefe;
+  margin: 3% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  /* Could be more or less, depending on screen size */
+  text-align: center;
+  border-radius: 25px;
+  overflow: auto;
+}
+
+/* Show submit progress modal*/
+.submit_modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  /* Could be more or less, depending on screen size */
+  text-align: center;
+  border-radius: 25px;
+  overflow: auto;
+}
+
+/* Show submit successful progress modal*/
+.submit_success_modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  /* Could be more or less, depending on screen size */
+  text-align: center;
+  border-radius: 25px;
+  overflow: auto;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+#grade {
+  font-size: 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.switch-field {
+  text-align: center;
+  display: flex;
+  overflow: hidden;
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  padding: 8px 16px;
+  margin-right: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: #1e87f0;
+  color: white;
+  box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+
+#console {
+  background-color: black;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  overflow-y: scroll;
+  position: relative;
+}
+
+#console p {
+  margin: 0px;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+#clearConsole {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+}
+
+.icon {
+  position: relative;
+}
+
+/*replace the content value with the
+corresponding value from the list below*/
+.icon:before {
+  content: "\f000";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  /*--adjust as necessary--*/
+  color: #000;
+  font-size: 18px;
+  padding-right: 0.5em;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+/* Added css rules here */
+div#robot.tabcontent {
+  height: 100%;
+  padding: 0px;
+}
+
+.tabcontent #virtual_map_ui {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: column;
+  height: inherit;
+}
+
+#obstacle_ui,
+#virtual_ui {
+  color: gray;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#obstacle_ui {
+  flex: 1;
+}
+#virtual_map_ui canvas {
+  flex-grow: 1;
+  display: block;
+}
+#virtual_ui {
+  flex: 5;
+}
+
+/* Virtual UI GRID*/
+#virtual_ui > #ui-grid-container {
+  display: grid;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  grid-template: 13% 40% auto / repeat(7, 1fr);
+  gap: 4px;
+}
+
+.grid-cell.span-col-2 {
+  grid-column: span 2;
+}
+.grid-cell.span-col-3 {
+  grid-column: span 3;
+}
+.grid-cell.span-col-4 {
+  grid-column: span 4;
+}
+
+#buttonlist {
+  display: flex;
+  width: 100%;
+  margin-left: -2px;
+}
+
+.button-group {
+  margin: auto 2px;
+}
+
+.button-group img {
+  width: 100%;
+  height: auto;
+}
+
+.button-group-indicator {
+  transform: scale(0.5, 0.5);
+  object-fit: contain;
+}
+
+.button-group .button-group-color-button {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.buzzer-icon {
+  width: 9%;
+}
+
+.vol-block {
+  width: 8px;
+  height: 8px;
+  margin-left: -3px;
+  background-color: rgb(145, 145, 145);
+}
+.vol-block:first-of-type {
+  margin-left: 0px;
+}
+
+#scale-section small {
+  width: 30%;
+}
+
+#scale-section input[type="range"] {
+  max-width: 65%;
+  margin-left: 4%;
+}
+
+#map-scale {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2%;
+  background: #4d4d4d;
+  outline: none;
+  opacity: 0.7;
+}
+
+#map-scale::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10%;
+  height: 20px;
+  background: #046aaa;
+  cursor: pointer;
+}
+
+#map-scale::-moz-range-thumb {
+  width: 10%;
+  height: 20px;
+  background: #046aaa;
+  cursor: pointer;
+}
+
+button.click-buttons {
+  padding: 12px;
+  border-radius: 24px;
+  font-size: 10px;
+  margin-top: 4px;
+  border: 2px solid rgb(102, 102, 102);
+  background: radial-gradient(rgb(255, 255, 255), rgb(161, 161, 161));
+}
+
+button.click-buttons:hover {
+  background: rgb(161, 161, 161);
+}
+
+.click-buttons.button-active,
+.click-buttons:active {
+  border-color: green;
+  color: green;
+  background: rgb(112, 233, 184) !important;
+}
+
+.vol-block.active:nth-of-type(1),
+.vol-block.active:nth-of-type(2),
+.vol-block.active:nth-of-type(3),
+.vol-block.active:nth-of-type(4) {
+  background-color: rgb(0, 192, 54);
+}
+
+.vol-block.active:nth-of-type(5),
+.vol-block.active:nth-of-type(6),
+.vol-block.active:nth-of-type(7) {
+  background-color: rgb(233, 184, 23);
+}
+
+.vol-block.active:nth-of-type(8),
+.vol-block.active:nth-of-type(9),
+.vol-block.active:nth-of-type(10) {
+  background-color: rgb(233, 51, 23);
+}
+
+.canvas-assets {
+  display: none;
+}
+
+#ultra {
+  font-family: Arial;
+  font-size: 24px;
+  width: 60px;
+  height: 30px;
+  background-color: #b0b0b0;
+  outline: none;
+  border-style: none;
+}
+
+#LeftSpeed {
+  font-family: Arial;
+  font-size: 24px;
+  width: 60px;
+  height: 30px;
+  background-color: #b0b0b0;
+  outline: none;
+  border-style: none;
+}
+
+#RightSpeed {
+  font-family: Arial;
+  font-size: 24px;
+  width: 60px;
+  height: 30px;
+  background-color: #b0b0b0;
+  outline: none;
+  border-style: none;
+}
